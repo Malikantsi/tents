@@ -1,14 +1,19 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-function convertToJson(res) {
+export async function convertToJson(res) {
+  const jsonResponse = await res.json();
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    throw {
+      name: 'servicesError',
+      message: jsonResponse // pass the detailed server error message object
+    };
   }
 }
 
-export default class ProductData {
+
+export default class ExternalServices {
   constructor(category) {
 
   }
@@ -31,4 +36,17 @@ export default class ProductData {
     });
     return searchResult;
   }
+  async checkout(payload) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
+  }
 }
+
+
+

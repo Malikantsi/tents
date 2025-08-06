@@ -26,3 +26,12 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+  const count = cart.length;
+  document.querySelector("#cart-count").textContent = count;
+}
+
+// Call it on page load
+updateCartCount();
