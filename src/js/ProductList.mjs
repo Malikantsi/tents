@@ -1,5 +1,6 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate, updateCartCount } from './utils.mjs';
 
+updateCartCount();
 function productCardTemplate(product) {
     // console.log("Rendering product:", product.Name);
     let discountHTML = "";
@@ -13,7 +14,7 @@ function productCardTemplate(product) {
     }
 
     return `<li class="product-card">
-        <a href="product_pages/index.html?product=${product.Id}">
+        <a href="/product_pages/?product=${product.Id}">
         <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
         <h2>${product.Brand.Name}</h2>
         <h3>${product.Name}</h3>
@@ -23,8 +24,6 @@ function productCardTemplate(product) {
       </li>`;
 
 }
-
-
 
 
 export default class ProductList {

@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, updateCartCount } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -27,11 +27,4 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
-  const count = cart.length;
-  document.querySelector("#cart-count").textContent = count;
-}
-
-// Call it on page load
 updateCartCount();

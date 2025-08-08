@@ -5,6 +5,15 @@ export function qs(selector, parent = document) {
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
+export function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+  const count = cart.length;
+  document.querySelector("#cart-count").textContent = count;
+}
+
+// Call it on page load
+
+
 // retrieve data from localstorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -23,12 +32,12 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
 export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
   if (clear) {
     parentElement.innerHTML = "";

@@ -7,8 +7,8 @@ export default class Product {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
 
-
     if (this.product) {
+
       this.renderProductDetails();
     } else {
       console.error(`Product with ID ${this.productId} not found.`);
@@ -25,6 +25,7 @@ export default class Product {
 
   renderProductDetails() {
     const productDetails = document.querySelector(".product-detail");
+    console.log(`Check: ${productDetails}`);
     if (!productDetails) {
       console.log("Product details container not found in DOM.");
       return;
@@ -43,11 +44,11 @@ export default class Product {
     productDetails.innerHTML = `
       <h3>${this.product.Brand.Name}</h3>
 
-      <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+      <h2 class="divider">${this.product.NameWithoutBrand} Now Then</h2>
 
       <img
         class="divider"
-        src="${this.product.Image}"
+        src="${this.product.Images.PrimaryLarge}"
         alt="${this.product.NameWithoutBrand}"
       />
 
@@ -63,6 +64,7 @@ export default class Product {
         <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
       </div>
     `;
+    console.log(this.product.Images.PrimaryLarge);
     document.getElementById("addToCart").addEventListener("click", () => this.addProductToCart());
   }
 }
